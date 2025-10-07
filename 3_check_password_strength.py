@@ -21,14 +21,19 @@ def check_password_strength(password):
         score += 1
     else:
         feedback.append("Password should contain numbers")
+
+    if any(not(char.isalnum()) for char in password):
+        score += 1
+    else:
+        feedback.append("Password should contain special characters.")
     
     return score, feedback
 
 # Test passwords
-passwords = ["hello", "Hello123", "PASSWORD", "MyPass123!"]
+passwords = ["hello", "Hello123", "PASSWORD", "MyPass123!", "cdfhHJSC23@@", "  "]
 for pwd in passwords:
     score, issues = check_password_strength(pwd)
-    print(f"'{pwd}': Score {score}/4")
+    print(f"'{pwd}': Score {score}/5")
     for issue in issues:
         print(f"  - {issue}")
     print()
